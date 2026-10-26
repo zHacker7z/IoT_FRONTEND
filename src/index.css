@@ -1,0 +1,103 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Archivo', ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  /* Base neutra, fria e mineral */
+  --color-canvas: #ecf0ee;
+  --color-surface: #ffffff;
+  --color-sunken: #f4f7f6;
+  --color-ink: #15242a;
+  --color-ink-soft: #33454c;
+  --color-ink-muted: #5b6c72;
+  --color-line: #d5dedc;
+  --color-line-strong: #b8c5c2;
+
+  /* Temperatura: âmbar. `temp` para traços, `temp-ink` para texto. */
+  --color-temp: #c7711a;
+  --color-temp-ink: #8f4e00;
+  --color-temp-wash: #fbf1e4;
+
+  /* Umidade: azul-petróleo */
+  --color-humid: #1b7f8e;
+  --color-humid-ink: #0f5c68;
+  --color-humid-wash: #e4f2f3;
+
+  /* Estados */
+  --color-ok: #2d7a4b;
+  --color-ok-wash: #e5f2ea;
+  --color-warn: #8a5800;
+  --color-warn-wash: #fcf3dc;
+  --color-danger: #b3261e;
+  --color-danger-wash: #fbe9e7;
+
+  --ease-instrument: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-sweep: sweep 1.2s var(--ease-instrument) backwards;
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+
+  @keyframes sweep {
+    from {
+      left: 0%;
+    }
+  }
+
+  @keyframes shimmer {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-canvas);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Largura variável da Archivo: usada nos títulos e nas leituras grandes. */
+@utility wide {
+  font-stretch: 118%;
+}
+
+@utility extra-wide {
+  font-stretch: 125%;
+}
+
+@utility condensed {
+  font-stretch: 88%;
+}
