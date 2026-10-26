@@ -106,11 +106,9 @@ Se o painel for publicado em HTTPS, a API também precisa estar em HTTPS; caso c
 
 ## Previsão do tempo
 
-O backend não oferece dados meteorológicos. Para ativar a seção, há duas opções:
+O backend não oferece dados meteorológicos. Para ativar a seção:
 
-1. Criar um endpoint de previsão no backend; ou
-2. Usar uma API meteorológica pública que aceite chamadas diretas do navegador **sem chave secreta** (por exemplo, Open-Meteo),
-   informando a localização da estação.
+1. Criar um endpoint de previsão no backend;
 
 Serviços que exigem chave privada não devem ser chamados pelo frontend: a chave ficaria exposta.
 
