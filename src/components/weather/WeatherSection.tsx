@@ -28,12 +28,7 @@ export function WeatherSection({ className = '' }: { className?: string }) {
           </p>
           <TechnicalDetails summary="O que é necessário para ativar">
             <ul className="list-disc space-y-1 pl-5">
-              <li>Um endpoint de previsão no backend do projeto; ou</li>
-              <li>
-                Uma API meteorológica pública que aceite consultas diretas do navegador sem chave secreta (por exemplo, Open-Meteo). Chaves
-                privadas não podem ficar no frontend.
-              </li>
-              <li>A localização da estação (cidade ou coordenadas), para consultar a previsão certa.</li>
+              <li>Um endpoint de previsão no backend do projeto.</li>
             </ul>
           </TechnicalDetails>
         </div>
