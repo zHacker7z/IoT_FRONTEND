@@ -55,6 +55,38 @@ Outros comandos: `npm run preview` (serve o build localmente), `npm test` (teste
 
 > As variáveis `VITE_` são incorporadas no momento do build. Ao mudar a URL da API, gere o build de novo.
 
+## Docker
+
+O projeto inclui um `Dockerfile` (build com Node 22 e servidor Nginx) e um `docker-compose.yml`.
+
+Requisito: Docker com Compose v2. Crie o `.env` a partir do modelo e preencha os valores reais (o Compose o usa tanto para interpolar os argumentos de build quanto como `env_file`):
+
+```bash
+cp .env.example .env
+docker compose up -d --build
+```
+
+O painel fica em http://localhost:3001 (a porta 80 do container é publicada na 3001).
+
+```bash
+docker compose ps        # ver o estado e o healthcheck
+docker compose logs -f   # acompanhar os logs
+docker compose down      # parar e remover o container
+```
+
+> Como as variáveis `VITE_*` são embutidas no bundle **em tempo de build**, alterar qualquer valor no `.env` exige refazer a imagem: `docker compose up -d --build`. O `env_file` do compose não consegue mudar a configuração de um bundle já gerado.
+
+Também é possível usar o Docker sem Compose:
+
+```bash
+docker build \
+  --build-arg VITE_API_BASE_URL=http://147.15.56.168:8000 \
+  --build-arg VITE_API_LATEST_PATH=leituras/ultima \
+  -t monitoramento-ambiental-frontend .
+
+docker run -d --name monitoramento-ambiental-frontend -p 3001:80 monitoramento-ambiental-frontend
+```
+
 ## Variáveis de ambiente
 
 | Variável | Obrigatória | Padrão | Descrição |

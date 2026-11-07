@@ -1,0 +1,26 @@
+services:
+  frontend:
+    build:
+      context: .
+      # As variáveis VITE_* são embutidas no bundle em tempo de build. O Compose
+      # lê o arquivo .env do diretório do projeto para interpolar os valores
+      # abaixo, então eles precisam estar no .env (copie de .env.example).
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-}
+        VITE_API_LATEST_PATH: ${VITE_API_LATEST_PATH:-}
+        VITE_API_HISTORY_PATH: ${VITE_API_HISTORY_PATH:-}
+        VITE_API_TIMEOUT_MS: ${VITE_API_TIMEOUT_MS:-}
+        VITE_REFRESH_INTERVAL_SECONDS: ${VITE_REFRESH_INTERVAL_SECONDS:-}
+        VITE_STALE_AFTER_MINUTES: ${VITE_STALE_AFTER_MINUTES:-}
+        VITE_API_FIELD_TEMPERATURE: ${VITE_API_FIELD_TEMPERATURE:-}
+        VITE_API_FIELD_HUMIDITY: ${VITE_API_FIELD_HUMIDITY:-}
+        VITE_API_FIELD_TIMESTAMP: ${VITE_API_FIELD_TIMESTAMP:-}
+    image: monitoramento-ambiental-frontend:latest
+    container_name: monitoramento-ambiental-frontend
+    # Variáveis de ambiente do container. Atenção: como o Vite embute os valores
+    # no build, alterar o .env exige `docker compose up -d --build`.
+    env_file:
+      - .env
+    ports:
+      - "3001:80"
+    restart: unless-stopped
